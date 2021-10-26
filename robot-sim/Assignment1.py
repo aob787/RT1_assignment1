@@ -90,10 +90,37 @@ def scan_obstacal(scaning_range, scaning_angle, angle_range):
 
 	return False
 
-drive(100, 5)
+def find_silver(scaning_range, scaning_angle, angle_range):
+	for token in R.see():
+		if (token.dist < scaning_range and token.rot_y > scaning_angle-angle_range and token.rot_y < scaning_angle +angle_range and token.info.marker_type is MARKER_TOKEN_SILVER):
+			#print(token.dist, token.rot_y)
+			return True
+
+	return False
+
+drive(100, 3)
 
 while 1:
-	if (scan_obstacal(1.2, 0, 22.5) == False):
+	if  (find_silver(1.2, 0, 90) == True):
+		print("jer")
+		dist, rot= find_silver_token()
+		while (rot*rot > 0.1):
+			dist, rot= find_silver_token()
+			print(rot*rot)
+			if rot < 0:
+				turn(-30,0.01)
+			else:
+				turn(30,0.01)
+		while (dist > 0.4):
+			dist, rot= find_silver_token()
+			drive(30,0.01)
+		print("Grab")
+		R.grab()
+		turn(-34,0.01*180)
+		R.release()
+		turn(-34,0.01*180)
+
+	elif (scan_obstacal(1.2, 0, 22.5) == False):
 		drive(100, 0.1)
 
 	else :
