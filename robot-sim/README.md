@@ -13,7 +13,7 @@ Tasks
 
 Pseudocode
 --------------------
-[
+```
 While True:
     if there is silver box in front (from -90 degs to 90 degs) of robot in xx m:
         find the position and angle of box
@@ -42,7 +42,7 @@ def Find_box(angle, range, distance, type of box):
         if box angle is between angle-range and angle+range and box distance is less than distance and box is the same type with type of box:
             return True
      return False
-]
+```
 The pseudocode describe the algorithm that robot should do. Firstly, the robot finds silver box in front of itself. Secondly, the robot check the obstacle in front of it, if there are no obstacle robot will move forward. So, last statement is for find which way that robot should turn to by increasing the angles of scanning.
 
 To implement this code, we have to do some experiment:
@@ -52,7 +52,7 @@ To implement this code, we have to do some experiment:
 Implemented code
 --------------------
 
-There are comments in code [assignment1.py]. So, I have tuned some code and add some feature to get robot work reliably.
+There are comments in code (assignment1.py). So, I have tuned some code and add some feature to get robot work reliably.
 
 
 Installing and running
