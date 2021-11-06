@@ -109,10 +109,10 @@ def find_silver(scaning_range, scaning_angle, angle_range):
 ----------------The program start below -------
 """
 
-drive(100, 3) # just drive straight
+#drive(100, 3) # just drive straight
 
-while 1: # while loop for keep code running forever
-	
+
+
 """
 I implemented 3 condition
 1. if there is silver box infront of the robot the robit will go to pick the box and place it behide the robot
@@ -125,24 +125,28 @@ I implemented 3 condition
    *Note that the robot will turn proporsional to the angle that its found
    turn(34,0.01*i) <- this value obtain by trail and error, but the result is robot tend to turn to the desired path
 """
+while 1: # while loop for keep code running forever
+	
+
 	if  (find_silver(1.2, 0, 90) == True):
-		print("jer")
+		print("Found silver box")
 		dist, rot= find_silver_token()
-		while (rot*rot > 0.1):
-			dist, rot= find_silver_token()
-			print(rot*rot)
-			if rot < 0:
-				turn(-30,0.01)
-			else:
-				turn(30,0.01)
-		while (dist > 0.4):
-			dist, rot= find_silver_token()
-			drive(30,0.01)
+		while (rot*rot > 0.35 or dist > 0.4):
+			if (rot*rot > 0.35):
+				dist, rot= find_silver_token()
+				#print(rot*rot)
+				if rot < 0:
+					turn(-10,0.01)
+				else:
+					turn(10,0.01)
+			if (dist > 0.4):
+				dist, rot= find_silver_token()
+				drive(30,0.01)
 		print("Grab")
 		R.grab()
-		turn(-34,0.01*180)
+		turn(-34,0.01*175)
 		R.release()
-		turn(-34,0.01*180)
+		turn(-34,0.01*175)
 
 	elif (scan_obstacal(1.2, 0, 22.5) == False):
 		drive(100, 0.1)
@@ -153,12 +157,12 @@ I implemented 3 condition
 		while(h>0.5 and flag == True):
 			for i in range(25, 100, 10):
 				if (scan_obstacal(h, -i, 15)== False):
-					print(-i)
+					#print(-i)
 					turn(-34,0.01*i)
 					flag = False
 					break
 				elif (scan_obstacal(h, i, 15)== False):
-					print(i)
+					#print(i)
 					turn(34,0.01*i)
 					flag = False
 					break
