@@ -27,6 +27,7 @@ While True:
         grab()
         turn(180degs)
         place()
+        turn(180degs)
     elif there are no golden box in front (from -30 degs to 30 degs) of robot in xx m:
         drive(forward for a while)
     else:
