@@ -5,16 +5,10 @@ from sr.robot import *
 """
 To run this code use the following command
 	$python2 run.py assignment1.py
+Tachadol Suthisomboon 5240225
 """
 
 # to intialize the variable for litmit the radius of detection
-
-
-a_th = 2.0
-""" float: Threshold for the control of the orientation"""
-
-d_th = 0.4
-""" float: Threshold for the control of the linear distance"""
 
 R = Robot()
 """ instance of the class Robot"""
@@ -82,6 +76,18 @@ box_detection_r = 100;sest golden token (-1 if no golden token is detected)
     else:
    		return dist, rot_y
 
+	
+"""
+Basically, two of fuctions be low work in same algorithm. The first one for golded boxeso, and the secound for silver boxes.
+It takes scanning_range and angle
+for example scanning range is how for that boxes will be take into account.
+scanning_angle is which angle that the robot will aimed for.
+angle_range is plus and minus to scanning_angle to increse the range. Let's think if we use 15 degs and didn't + and - no boxes will be found it maybe but rarely
+
+for example:
+ scan_obstacal(1m, 0, 90)
+ robot will find golden boxed in 1m from robot between -90 degs to 90 degs.
+"""
 def scan_obstacal(scaning_range, scaning_angle, angle_range):
 	for token in R.see():
 		if (token.dist < scaning_range and token.rot_y > scaning_angle-angle_range and token.rot_y < scaning_angle +angle_range and token.info.marker_type is MARKER_TOKEN_GOLD):
@@ -98,9 +104,27 @@ def find_silver(scaning_range, scaning_angle, angle_range):
 
 	return False
 
-drive(100, 3)
 
-while 1:
+"""
+----------------The program start below -------
+"""
+
+drive(100, 3) # just drive straight
+
+while 1: # while loop for keep code running forever
+	
+"""
+I implemented 3 condition
+1. if there is silver box infront of the robot the robit will go to pick the box and place it behide the robot
+2. if there are no golden box in front of robot (Let's say from -22.5 to 22.5 (this value obtain by tuning)) in 1.2 [unit]. 
+   The robot will continue go straight 
+3. if there are gold boxes the robot will find the direction that it has to turn.
+   First the robot will check in length 3 [unit] from 0, -25, 25, -35, 35 to -100, 100.
+   It can not find the free path the length will decrese to 2.5 and 1.5 (This prevent the case that we use far length and it stick in some corners
+   But if we use small value at first the robot can get into wrong direction in some cases)
+   *Note that the robot will turn proporsional to the angle that its found
+   turn(34,0.01*i) <- this value obtain by trail and error, but the result is robot tend to turn to the desired path
+"""
 	if  (find_silver(1.2, 0, 90) == True):
 		print("jer")
 		dist, rot= find_silver_token()
@@ -144,7 +168,8 @@ while 1:
 
 
 """
-#this part is for calibrating the range of detection by print all of boxes
+#This part is for calibrating the range of detection by print all of boxes
+#So, we can know how the unit should we use
 markers = R.see()
 print ("I can see", len(markers), "markers:")
 for m in markers:
