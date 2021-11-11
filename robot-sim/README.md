@@ -1,16 +1,16 @@
 Python Robotics Simulator - Assignment 1 Research Track I
 ================================
-Modified by Tachadol Suthisomboon
+Modified by Tachadol Suthisomboon.
 
 This repository was forked from the Reserch track 1 - assignment repository. The work is the part of Research track 1 course.
 
 This is a simple, portable robot simulator developed by [Student Robotics](https://studentrobotics.org).
-Some of the arenas and the exercises have been modified for the Research Track I course
+Some of the arenas and the exercises have been modified for the Research Track I course.
 
 Tasks
 --------------------
--Make the keep running in the arena with same direction (i.e., counter-clockwise or clockwise) with out touching gold boxes
--When the robot found the silver box, the robot should grab and place it behind itsself
+-Makeing the robot to kepp running in the arena with same direction (i.e., counter-clockwise or clockwise) without touching golden boxes.
+-When the robot found the silver box, the robot should grab and place it behind itsself.
 
 Pseudocode
 --------------------
@@ -74,4 +74,3 @@ On Ubuntu, this can be accomplished by:
 * Find the location of srtools: `pip show sr.tools`
 * Get the location. In my case this was `/usr/local/lib/python2.7/dist-packages`
 * Create symlink: `ln -s path/to/simulator/sr/robot /usr/local/lib/python2.7/dist-packages/sr/`
-
