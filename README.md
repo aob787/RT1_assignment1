@@ -55,7 +55,7 @@ Implemented code
 --------------------
 
 There are comments in code (assignment1.py). So, I have tuned some code and add some feature to get robot work reliably.
-To run this code: $python2 run.py assignment1.py
+To run this code: python2 run.py assignment1.py
 
 Installing and running
 ----------------------
