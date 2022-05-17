@@ -1,5 +1,4 @@
 from __future__ import print_function
-
 import time
 from sr.robot import *
 """
@@ -76,7 +75,7 @@ box_detection_r = 100;sest golden token (-1 if no golden token is detected)
     else:
    		return dist, rot_y
 
-	
+
 """
 Basically, two of fuctions be low work in same algorithm. The first one for golded boxeso, and the secound for silver boxes.
 It takes scanning_range and angle
@@ -109,15 +108,15 @@ def find_silver(scaning_range, scaning_angle, angle_range):
 ----------------The program start below -------
 """
 
-drive(100, 3) # just drive straight
+#drive(100, 3) # just drive straight
 
-while 1: # while loop for keep code running forever
-	
+
+
 """
 I implemented 3 condition
 1. if there is silver box infront of the robot the robit will go to pick the box and place it behide the robot
-2. if there are no golden box in front of robot (Let's say from -22.5 to 22.5 (this value obtain by tuning)) in 1.2 [unit]. 
-   The robot will continue go straight 
+2. if there are no golden box in front of robot (Let's say from -22.5 to 22.5 (this value obtain by tuning)) in 1.2 [unit].
+   The robot will continue go straight
 3. if there are gold boxes the robot will find the direction that it has to turn.
    First the robot will check in length 3 [unit] from 0, -25, 25, -35, 35 to -100, 100.
    It can not find the free path the length will decrese to 2.5 and 1.5 (This prevent the case that we use far length and it stick in some corners
@@ -125,24 +124,44 @@ I implemented 3 condition
    *Note that the robot will turn proporsional to the angle that its found
    turn(34,0.01*i) <- this value obtain by trail and error, but the result is robot tend to turn to the desired path
 """
+count_catch = 0
+laps =0
+while 1: # while loop for keep code running forever
+
+
 	if  (find_silver(1.2, 0, 90) == True):
-		print("jer")
+		#print("Found silver box")
 		dist, rot= find_silver_token()
-		while (rot*rot > 0.1):
-			dist, rot= find_silver_token()
-			print(rot*rot)
-			if rot < 0:
-				turn(-30,0.01)
-			else:
-				turn(30,0.01)
-		while (dist > 0.4):
-			dist, rot= find_silver_token()
-			drive(30,0.01)
-		print("Grab")
+		while (rot*rot > 0.8 or dist > 0.4):
+			if (rot*rot > 0.8):
+				dist, rot= find_silver_token()
+				#print(rot*rot)
+				if rot < 0:
+					turn(-20,0.02)
+				else:
+					turn(20,0.02)
+			if (dist > 0.4):
+				dist, rot= find_silver_token()
+				drive(30,0.01)
+		#print("Grab")
+
 		R.grab()
-		turn(-34,0.01*180)
+		count_catch = count_catch + 1
+		if (count_catch == 1):
+			t0 = time.time()
+		elif (count_catch > 7):
+			t1 = time.time()
+			total = t1-t0
+			laps = laps+1
+			print ("lap " + str(laps) + "  time " + str(total))
+			t0 = time.time()
+			count_catch = 1
+			if (laps == 6):
+				quit()
+
+		turn(-34,0.01*175)
 		R.release()
-		turn(-34,0.01*180)
+		turn(-34,0.01*175)
 
 	elif (scan_obstacal(1.2, 0, 22.5) == False):
 		drive(100, 0.1)
@@ -153,12 +172,12 @@ I implemented 3 condition
 		while(h>0.5 and flag == True):
 			for i in range(25, 100, 10):
 				if (scan_obstacal(h, -i, 15)== False):
-					print(-i)
+					#print(-i)
 					turn(-34,0.01*i)
 					flag = False
 					break
 				elif (scan_obstacal(h, i, 15)== False):
-					print(i)
+					#print(i)
 					turn(34,0.01*i)
 					flag = False
 					break

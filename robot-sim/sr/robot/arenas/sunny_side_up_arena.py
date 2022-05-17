@@ -9,6 +9,8 @@ from .arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
 from ..markers import Token
 from ..vision import MARKER_TOKEN_GOLD, MARKER_TOKEN_SILVER
 
+import random
+
 class GoldToken(Token):
     def __init__(self, arena, marker_number):
         super(GoldToken, self).__init__(arena, marker_number,
@@ -45,146 +47,172 @@ class SunnySideUpArena(Arena):
             token.location = (-9, -4.5+i*0.25)
             self.objects.append(token)
             count+1
-	
+
         for i in range(23):
             token = GoldToken(self, count)
             token.location = (-7, -2.75+i*0.25)
             self.objects.append(token)
             count+1
-        
+
         #for i in range(55):
         #    token = Token(self, i, damping=10)
         #    token.location = (-6.75+i*0.25, 3)
         #    self.objects.append(token)
-	
+
         #for i in range(71):
         #    token = Token(self, i, damping=10)
         #    token.location = (-8.75+i*0.25, 5)
-        #    self.objects.append(token) 
-            
+        #    self.objects.append(token)
+
         for i in range(13):
              token = GoldToken(self, count)
              token.location = (-6.75+i*0.25, 3)
              self.objects.append(token)
              count+1
-	
+
         for i in range(29):
             token = GoldToken(self, count)
             token.location = (-8.75+i*0.25, 5)
-            self.objects.append(token) 
+            self.objects.append(token)
             count+1
-            
+
         for i in range(16):
             token = GoldToken(self, count)
             token.location = (-3.5, -1+i*0.25)
-            self.objects.append(token) 
+            self.objects.append(token)
             count+1
-            
+
         for i in range(16):
             token = GoldToken(self, count)
             token.location = (-1.5, 1+i*0.25)
-            self.objects.append(token) 
+            self.objects.append(token)
             count+1
-            
-        
+
+
         for i in range(11):
             token = GoldToken(self, count)
             token.location = (-1.25+i*0.25, 0.75)
             self.objects.append(token)
             count+1
-            
+
         for i in range(27):
             token = GoldToken(self, count)
             token.location = (-3.25+i*0.25, -1.25)
             self.objects.append(token)
             count+1
-      
-        
+
+
         for i in range(16):
             token = GoldToken(self, count)
             token.location = (3.5, -1+i*0.25)
             self.objects.append(token)
-            count+1 
-            
+            count+1
+
         for i in range(16):
             token = GoldToken(self, count)
             token.location = (1.5, 1+i*0.25)
-            self.objects.append(token) 
+            self.objects.append(token)
             count+1
-            
+
         for i in range(13):
              token = GoldToken(self, count)
              token.location = (3.75+i*0.25, 3)
              self.objects.append(token)
              count+1
-	
+
         for i in range(29):
             token = GoldToken(self, count)
             token.location = (1.75+i*0.25, 5)
             self.objects.append(token)
             count+1
-            
+
         count = 0
-            
+
         for i in range(55):
             token = GoldToken(self, count)
             token.location = (-6.75+i*0.25, -3)
             self.objects.append(token)
             count+1
-	
+
         for i in range(71):
             token = GoldToken(self, count)
             token.location = (-8.75+i*0.25, -4.75)
-            self.objects.append(token)  
-            count+1 
-            
+            self.objects.append(token)
+            count+1
+
         for i in range(38):
             token = GoldToken(self, count)
             token.location = (9, -4.5+i*0.25)
             self.objects.append(token)
             count+1
-	
+
         for i in range(23):
             token = GoldToken(self, count)
             token.location = (7, -2.75+i*0.25)
-            self.objects.append(token) 
+            self.objects.append(token)
             count+1
-            
-        token=SilverToken(self,count)
-        token.location = (-8, 0)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (-6, 3.75)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (-2.5, 1.25)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (1.5, -0.25)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (6, 3.75)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (8, 0.0)
-        self.objects.append(token) 
-        count+1
-        
-        token=SilverToken(self,count)
-        token.location = (-4.0, -4.0)
-        self.objects.append(token) 
-        count+1
-        
+
+        # token=SilverToken(self,count)
+        # token.location = (-8, 0)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (-6, 3.75)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (-2.5, 1.25)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (1.5, -0.25)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (6, 3.75)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (8, 0.0)
+        # self.objects.append(token)
+        # count+1
+        #
+        # token=SilverToken(self,count)
+        # token.location = (-4.0, -4.0)
+        # self.objects.append(token)
+        # count+1
+
+        random.seed(62)
+        for i in range(7):
+            x= 100
+            y= 100
+
+            while( (x < 7.5 and x > -7.5 and y < -1 and y > -3.5) or (x < -3 and x > -7.5 and y < 3.5 and y > -1) or (x < 7.5 and x > 3.5 and y < 3.5 and y > -1) or (x < 1.75 and x > -1.75 and y < 5 and y > 0.75) or (abs(x) > 8.75) or (abs(y) > 4.25) ):
+                sym_x = 1
+                sym_y = 1
+                if (random.random() >= 0.5):
+                    sym_x = -1
+                if (random.random() >= 0.5):
+                    sym_y = -1
+                x = random.random() * 8.75 * sym_x
+                y = random.random() * 4.25 * sym_y
+
+            token=SilverToken(self,count)
+            token.location = (x, y)
+            self.objects.append(token)
+            count+1
+#size = (19, 10)
+# not in -7 to 7 (x) and - 1 to -3 --> off-set -7.5 to 7.5 and -0.5 to -3.5
+
+
+#not in -7 to -3.5 and -1 to 3 --> off-set -7.5 to -3 and -1 to 3.5
+#and other way around
+#not in -1.5 to 1.5 and 0.75 to 5
 
     def draw_background(self, surface, display):
         super(SunnySideUpArena, self).draw_background(surface, display)
